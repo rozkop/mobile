@@ -3,15 +3,10 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Colors from "../../constants/colors";
 import { getFormattedDate } from "../../util/date";
 
-function CommunityItem({
-  itemData,
-  fromLikedCommunities,
-  navigateToCommunity,
-  closeModal,
-}) {
+function CommunityItem({ itemData, navigateToCommunity, closeModal }) {
   let rating = 0;
 
-  if (fromLikedCommunities) {
+  if (isNaN(itemData.item.rating)) {
     rating = JSON.parse(itemData.item.rating);
     rating = rating.like;
   }
@@ -33,9 +28,7 @@ function CommunityItem({
           <Text style={styles.topText}>
             Created: {getFormattedDate(new Date(itemData.item.created_at))}
           </Text>
-          <Text style={styles.topText}>
-            Users: {fromLikedCommunities ? rating : itemData.item.rating}
-          </Text>
+          <Text style={styles.topText}>Users: {rating}</Text>
           <Text style={styles.nameText}>{itemData.item.name}</Text>
           <Text style={styles.descriptionText}>
             {itemData.item.description}

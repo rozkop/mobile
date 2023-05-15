@@ -35,18 +35,20 @@ function CommunityHeader({
               }}
               disabled={!authCtx.isAuthenticated || isMember}
             >
-              <View
-                style={[
-                  styles.joinContainer,
-                  isMember ? styles.memberStar : styles.notMemberStar,
-                ]}
-              >
-                <Ionicons
-                  name="star"
-                  color={isMember ? Colors.member : Colors.grey500}
-                  size={25}
-                />
-              </View>
+              {authCtx.isAuthenticated && (
+                <View
+                  style={[
+                    styles.joinContainer,
+                    isMember ? styles.memberStar : styles.notMemberStar,
+                  ]}
+                >
+                  <Ionicons
+                    name="star"
+                    color={isMember ? Colors.member : Colors.grey500}
+                    size={25}
+                  />
+                </View>
+              )}
             </Pressable>
           </View>
           <Text style={styles.descriptionText}>{description}</Text>
@@ -78,12 +80,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 40,
     height: 40,
-  },
-  joinText: {
-    marginRight: 5,
-    fontSize: 18,
-    fontWeight: "500",
-    color: Colors.grey500,
   },
   nameText: {
     fontSize: 22,

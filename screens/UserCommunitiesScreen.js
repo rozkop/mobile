@@ -25,7 +25,6 @@ function UserCommunitiesScreen() {
   const [userLikedCommunities, setUserLikedCommunities] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState([]);
-  const [fromLikedCommunities, setFromLikedCommunities] = useState(false);
 
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
@@ -64,7 +63,6 @@ function UserCommunitiesScreen() {
 
   function closeModal() {
     setModalVisible(false);
-    setFromLikedCommunities(false);
     setModalData([]);
   }
 
@@ -76,7 +74,6 @@ function UserCommunitiesScreen() {
     return (
       <CommunityItem
         itemData={itemData}
-        fromLikedCommunities={fromLikedCommunities}
         navigateToCommunity={navigateToCommunity}
         closeModal={closeModal}
       />
@@ -108,9 +105,7 @@ function UserCommunitiesScreen() {
         <Pressable
           android_ripple={Colors.ripple}
           onPress={() => {
-            openModal(),
-              setModalData(userLikedCommunities),
-              setFromLikedCommunities(true);
+            openModal(), setModalData(userLikedCommunities);
           }}
         >
           <View style={[styles.userInfoContainer, styles.userStatsContainer]}>
